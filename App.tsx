@@ -1,16 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import React, {useEffect, useState} from 'react';
 import Button from './src/Button/Button';
 
 
 
 export default function App() {
+  const [counter, setCounter] = useState(0);
+  useEffect(() => {
+    console.log("updated : ", counter)
+  }, [counter])
+  useEffect(() => {
+    console.log("montage du composant : []")
+    return () => {
+      console.log("démontage du composant : []")
+    }
+  }, [])
   return (
     <View style={styles.container}>
-      <Button bgColor="red" color="white" onButtonPressed={() => console.log('Annuler pressed')}> Annuler</Button>
-      <Button bgColor="blue" color="white" onButtonPressed={() => console.log('OK pressed')}> OK</Button>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text>valeur de counter : {counter} </Text>
+      <Button bgColor="red" color="white" onButtonPressed={() => {
+      setCounter(counter - 1);
+        console.log(counter)
+        }}> -1</Button>
+      <Button bgColor="blue" color="white" onButtonPressed={() => {
+        setCounter(counter + 1);
+        console.log(counter)
+      }}> +1</Button>
     </View>
   );
 }
