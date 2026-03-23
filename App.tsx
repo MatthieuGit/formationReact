@@ -7,8 +7,8 @@ import Button from './src/Button/Button';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Button bgColor="red" color="white"> Annuler</Button>
-      <Button bgColor="green" color="white"> OK</Button>
+      <Button bgColor="red" color="white" onButtonPressed={() => console.log('Annuler pressed')}> Annuler</Button>
+      <Button bgColor="blue" color="white" onButtonPressed={() => console.log('OK pressed')}> OK</Button>
       <Text>Open up App.tsx to start working on your app!</Text>
       <StatusBar style="auto" />
     </View>

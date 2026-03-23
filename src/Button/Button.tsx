@@ -1,13 +1,22 @@
-import {View, Text} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
+import React from 'react';
 import styles from './Button.styles';
-const Button = (props) => {
-  console.log(props);
+
+interface IbuttonProps {
+    children: string,
+    color?: "white" | "black",
+    bgColor: "blue" | "red" ,
+    onButtonPressed: () => void
+}
+
+const Button: React.FC<IbuttonProps> = ({children, color, bgColor, onButtonPressed=()=>{}}) => {
     return (
-    <View style={[styles.button, {backgroundColor: props.bgColor}]} >
-      <Text style={[styles.buttonText, {color: props.color}]} >
-        {props.children}
-      </Text>
-    </View>
+    <Pressable onPress={(evt) => {
+        onButtonPressed()
+    }}
+    style={[styles.button, {backgroundColor: bgColor}]} >
+      <Text style={[styles.buttonText, {color: color}]} >{children}</Text>
+    </Pressable>
   );
 };
 
