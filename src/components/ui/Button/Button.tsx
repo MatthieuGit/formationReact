@@ -1,5 +1,5 @@
 import {View, Text, Pressable} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Button.styles';
 
 interface IbuttonProps {
@@ -10,11 +10,18 @@ interface IbuttonProps {
 }
 
 const Button: React.FC<IbuttonProps> = ({children, color, bgColor, onButtonPressed=()=>{}}) => {
+     const [buttonColor, setButtonColor] = useState<string>(bgColor);
+     useEffect(() => {
+        setTimeout(() => {
+            setButtonColor(bgColor)
+        }, 200);
+     }, [bgColor, setButtonColor])
     return (
     <Pressable onPress={(evt) => {
+        setButtonColor('grey')
         onButtonPressed()
     }}
-    style={[styles.button, {backgroundColor: bgColor}]} >
+    style={[styles.button, {backgroundColor: buttonColor}]} >
       <Text style={[styles.buttonText, {color: color}]} >{children}</Text>
     </Pressable>
   );

@@ -1,42 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import Button from './src/Button/Button';
-
-
-
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { IProduct } from "./src/interfaces/IProducts";
+import ProductsListViewer from "./src/components/ui/ProductsListViewer/ProductsListViewer.connected";
+import Banner from "./src/components/ui/Banner/Banner";
+import {store} from './src/store/store'
+import { Provider } from "react-redux";
+import ProductsSearcher from "./src/components/functionnals/ProductsSearcher/ProductsSearcher.connected";
 export default function App() {
-  const [counter, setCounter] = useState(0);
-  useEffect(() => {
-    console.log("updated : ", counter)
-  }, [counter])
-  useEffect(() => {
-    console.log("montage du composant : []")
-    return () => {
-      console.log("démontage du composant : []")
-    }
-  }, [])
   return (
-    <View style={styles.container}>
-      <Text>valeur de counter : {counter} </Text>
-      <Button bgColor="red" color="white" onButtonPressed={() => {
-      setCounter(counter - 1);
-        console.log(counter)
-        }}> -1</Button>
-      <Button bgColor="blue" color="white" onButtonPressed={() => {
-        setCounter(counter + 1);
-        console.log(counter)
-      }}> +1</Button>
-    </View>
+    <Provider store={store}>
+      <View style={{ flex: 1, }}>
+        <Banner/>
+        <ProductsSearcher/>
+        <ScrollView>
+          <ProductsListViewer/>
+        </ScrollView>
+      </View>
+    </Provider>
   );
 }
 
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const styles = StyleSheet.create({});
